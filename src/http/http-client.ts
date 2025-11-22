@@ -47,17 +47,21 @@ export class HttpClient {
     this.axios.interceptors.request.use(
       (config) => {
         if (this.config.debug) {
+          // eslint-disable-next-line no-console, @typescript-eslint/no-unsafe-assignment
           console.log('[Pickup Mtaani SDK] Request:', {
             method: config.method?.toUpperCase(),
             url: config.url,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             params: config.params,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             data: config.data,
           });
         }
         return config;
       },
-      (error) => {
+      (error: unknown) => {
         if (this.config.debug) {
+          // eslint-disable-next-line no-console
           console.error('[Pickup Mtaani SDK] Request error:', error);
         }
         return Promise.reject(error);
@@ -68,18 +72,21 @@ export class HttpClient {
     this.axios.interceptors.response.use(
       (response) => {
         if (this.config.debug) {
+          // eslint-disable-next-line no-console, @typescript-eslint/no-unsafe-assignment
           console.log('[Pickup Mtaani SDK] Response:', {
             status: response.status,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             data: response.data,
           });
         }
         return response;
       },
-      (error) => {
+      (error: unknown) => {
         if (this.config.debug) {
+          // eslint-disable-next-line no-console
           console.error('[Pickup Mtaani SDK] Response error:', error);
         }
-        throw this.transformError(error);
+        throw this.transformError(error as AxiosError<ApiErrorResponse>);
       }
     );
   }
@@ -127,7 +134,7 @@ export class HttpClient {
   /**
    * Make a GET request
    */
-  async get<T>(url: string, params?: Record<string, any>): Promise<T> {
+  async get<T>(url: string, params?: Record<string, unknown>): Promise<T> {
     const response = await this.axios.get<T>(url, { params });
     return response.data;
   }
@@ -137,8 +144,8 @@ export class HttpClient {
    */
   async post<T>(
     url: string,
-    data?: any,
-    config?: { params?: Record<string, any> }
+    data?: unknown,
+    config?: { params?: Record<string, unknown> }
   ): Promise<T> {
     const response = await this.axios.post<T>(url, data, config);
     return response.data;
@@ -149,8 +156,8 @@ export class HttpClient {
    */
   async put<T>(
     url: string,
-    data?: any,
-    config?: { params?: Record<string, any> }
+    data?: unknown,
+    config?: { params?: Record<string, unknown> }
   ): Promise<T> {
     const response = await this.axios.put<T>(url, data, config);
     return response.data;
@@ -159,7 +166,7 @@ export class HttpClient {
   /**
    * Make a DELETE request
    */
-  async delete<T>(url: string, params?: Record<string, any>): Promise<T> {
+  async delete<T>(url: string, params?: Record<string, unknown>): Promise<T> {
     const response = await this.axios.delete<T>(url, { params });
     return response.data;
   }

@@ -22,17 +22,15 @@ export function validatePackageValue(
   limit: number = DEFAULT_PACKAGE_VALUE_LIMIT
 ): void {
   if (value > limit) {
-    throw new ValidationError(
-      `Package value ${value} exceeds the limit of ${limit}`,
-      [`packageValue: must not exceed ${limit}`]
-    );
+    throw new ValidationError(`Package value ${value} exceeds the limit of ${limit}`, [
+      `packageValue: must not exceed ${limit}`,
+    ]);
   }
-  
+
   if (value < 0) {
-    throw new ValidationError(
-      'Package value must be a positive number',
-      ['packageValue: must be greater than or equal to 0']
-    );
+    throw new ValidationError('Package value must be a positive number', [
+      'packageValue: must be greater than or equal to 0',
+    ]);
   }
 }
 
@@ -56,9 +54,8 @@ export function isValidPackageValue(
  */
 export function validateDeliveryBalance(balance: number): void {
   if (balance < 0) {
-    throw new ValidationError(
-      'Delivery balance must be a positive number',
-      ['on_delivery_balance: must be greater than or equal to 0']
-    );
+    throw new ValidationError('Delivery balance must be a positive number', [
+      'on_delivery_balance: must be greater than or equal to 0',
+    ]);
   }
 }

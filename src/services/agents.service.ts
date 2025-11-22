@@ -18,16 +18,19 @@ export class AgentsService {
    * ```typescript
    * // Get all agents
    * const agents = await client.agents.list();
-   * 
+   *
    * // Filter by location
    * const agents = await client.agents.list({ locationId: 245 });
-   * 
+   *
    * // Search by business name
    * const agents = await client.agents.list({ searchKey: 'kikuyu' });
    * ```
    */
   async list(params?: AgentQueryParams): Promise<Agent[]> {
-    const response = await this.http.get<ApiResponse<Agent[]>>('/agents', params);
+    const response = await this.http.get<ApiResponse<Agent[]>>(
+      '/agents',
+      params as Record<string, unknown>
+    );
     return response.data || [];
   }
 }

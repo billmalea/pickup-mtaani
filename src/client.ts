@@ -12,17 +12,17 @@ import { WebhooksService } from './services/webhooks.service';
 
 /**
  * Main client for interacting with the Pickup Mtaani API
- * 
+ *
  * @example
  * ```typescript
  * import { PickupMtaaniClient } from 'pickup-mtaani-sdk';
- * 
+ *
  * const client = new PickupMtaaniClient({
  *   apiKey: 'your-api-key-here',
  *   timeout: 30000,
  *   debug: false
  * });
- * 
+ *
  * // Use the client
  * const business = await client.business.get();
  * const zones = await client.locations.getZones();

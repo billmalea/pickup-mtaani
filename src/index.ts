@@ -1,7 +1,7 @@
 /**
  * Pickup Mtaani Node.js SDK
  * Official TypeScript/JavaScript SDK for the Pickup Mtaani API
- * 
+ *
  * @packageDocumentation
  */
 

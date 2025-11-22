@@ -13,13 +13,13 @@ config({ path: envPath });
 // Validate required environment variables
 export function validateTestEnv(): void {
   const requiredVars = ['PICKUP_MTAANI_API_KEY'];
-  const missing = requiredVars.filter(varName => !process.env[varName]);
+  const missing = requiredVars.filter((varName) => !process.env[varName]);
 
   if (missing.length > 0) {
     throw new Error(
       `Missing required environment variables: ${missing.join(', ')}\n` +
-      'Please create a .env.local file with your API credentials.\n' +
-      'See .env.example for the template.'
+        'Please create a .env.local file with your API credentials.\n' +
+        'See .env.example for the template.'
     );
   }
 }

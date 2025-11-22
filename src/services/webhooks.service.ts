@@ -18,7 +18,7 @@ export class WebhooksService {
    * await client.webhooks.register({
    *   webhook_url: 'https://yourdomain.com/webhooks/pickup-mtaani'
    * });
-   * 
+   *
    * // Your webhook endpoint should handle POST requests:
    * // POST /webhooks/pickup-mtaani
    * // Body: { event_type: 'package.state_changed', timestamp: ..., data: {...} }

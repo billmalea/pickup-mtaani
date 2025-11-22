@@ -50,17 +50,17 @@ export function isValidKenyanPhoneNumber(phone: string): boolean {
 export function formatKenyanPhoneNumber(phone: string): string {
   // Remove any spaces or dashes
   const cleaned = phone.replace(/[\s-]/g, '');
-  
+
   // If starts with 0, replace with +254
   if (cleaned.startsWith('0')) {
     return '+254' + cleaned.substring(1);
   }
-  
+
   // If starts with 254 (without +), add +
   if (cleaned.startsWith('254')) {
     return '+' + cleaned;
   }
-  
+
   // Already in correct format
   return cleaned;
 }

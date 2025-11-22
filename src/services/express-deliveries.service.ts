@@ -75,11 +75,9 @@ export class ExpressDeliveriesService {
    * ```
    */
   async create(businessId: BusinessId, data: CreateExpressPackageRequest): Promise<ExpressPackage> {
-    const response = await this.http.post<ApiResponse<ExpressPackage>>(
-      '/packages/express',
-      data,
-      { params: { b_id: businessId } }
-    );
+    const response = await this.http.post<ApiResponse<ExpressPackage>>('/packages/express', data, {
+      params: { b_id: businessId },
+    });
     if (!response.data) {
       throw new Error('No package data returned');
     }
@@ -119,11 +117,9 @@ export class ExpressDeliveriesService {
     businessId: BusinessId,
     data: UpdateExpressPackageRequest
   ): Promise<ExpressPackage> {
-    const response = await this.http.put<ApiResponse<ExpressPackage>>(
-      '/packages/express',
-      data,
-      { params: { id, b_id: businessId } }
-    );
+    const response = await this.http.put<ApiResponse<ExpressPackage>>('/packages/express', data, {
+      params: { id, b_id: businessId },
+    });
     if (!response.data) {
       throw new Error('No package data returned');
     }

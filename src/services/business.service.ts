@@ -1,9 +1,5 @@
 import { HttpClient } from '../http/http-client';
-import {
-  ApiResponse,
-  PaginatedResponse,
-  PaginationParams,
-} from '../types/common';
+import { ApiResponse, PaginatedResponse, PaginationParams } from '../types/common';
 import { Business, BusinessCategory, UpdateBusinessRequest } from '../types/business';
 
 /**
@@ -59,12 +55,10 @@ export class BusinessService {
    * @throws {ValidationError} If validation fails
    * @throws {InternalServerError} If server error occurs
    */
-  async getCategories(
-    params?: PaginationParams
-  ): Promise<PaginatedResponse<BusinessCategory>> {
+  async getCategories(params?: PaginationParams): Promise<PaginatedResponse<BusinessCategory>> {
     return this.http.get<PaginatedResponse<BusinessCategory>>(
       '/business/categories',
-      params
+      params as Record<string, unknown>
     );
   }
 }

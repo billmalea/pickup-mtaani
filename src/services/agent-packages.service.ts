@@ -1,10 +1,5 @@
 import { HttpClient } from '../http/http-client';
-import {
-  ApiResponse,
-  PaginatedResponse,
-  BusinessId,
-  PackageId,
-} from '../types/common';
+import { ApiResponse, PaginatedResponse, BusinessId, PackageId } from '../types/common';
 import {
   AgentPackage,
   CreateAgentPackageRequest,
@@ -105,10 +100,10 @@ export class AgentPackagesService {
    * ```typescript
    * // Get all packages
    * const packages = await client.agentPackages.list(505);
-   * 
+   *
    * // Filter by state
    * const inTransit = await client.agentPackages.list(505, { state: 'in_transit' });
-   * 
+   *
    * // With pagination
    * const page1 = await client.agentPackages.list(505, { pageNumber: 0, pageSize: 10 });
    * ```

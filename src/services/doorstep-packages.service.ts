@@ -1,10 +1,5 @@
 import { HttpClient } from '../http/http-client';
-import {
-  ApiResponse,
-  PaginatedResponse,
-  BusinessId,
-  PackageId,
-} from '../types/common';
+import { ApiResponse, PaginatedResponse, BusinessId, PackageId } from '../types/common';
 import {
   DoorstepPackage,
   CreateDoorstepPackageRequest,
@@ -110,10 +105,10 @@ export class DoorstepPackagesService {
    * ```typescript
    * // Get all packages
    * const packages = await client.doorstepPackages.list(505);
-   * 
+   *
    * // Filter by customer name
    * const results = await client.doorstepPackages.list(505, { customerName: 'Jane' });
-   * 
+   *
    * // With pagination
    * const page1 = await client.doorstepPackages.list(505, { pageNumber: 0, pageSize: 20 });
    * ```

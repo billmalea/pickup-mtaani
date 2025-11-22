@@ -43,7 +43,10 @@ export class LocationsService {
    * @throws {InternalServerError} If server error occurs
    */
   async getLocations(params?: LocationsQueryParams): Promise<Location[]> {
-    const response = await this.http.get<ApiResponse<Location[]>>('/locations', params);
+    const response = await this.http.get<ApiResponse<Location[]>>(
+      '/locations',
+      params as Record<string, unknown>
+    );
     return response.data || [];
   }
 
@@ -59,7 +62,7 @@ export class LocationsService {
   ): Promise<DoorstepDestination[]> {
     const response = await this.http.get<ApiResponse<DoorstepDestination[]>>(
       '/locations/doorstep-destinations',
-      params
+      params as Record<string, unknown>
     );
     return response.data || [];
   }

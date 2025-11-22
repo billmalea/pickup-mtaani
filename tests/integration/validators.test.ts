@@ -8,10 +8,7 @@ import {
   isValidKenyanPhoneNumber,
   formatKenyanPhoneNumber,
 } from '../../src/validators/phone-validator';
-import {
-  validatePackageValue,
-  isValidPackageValue,
-} from '../../src/validators/package-validator';
+import { validatePackageValue, isValidPackageValue } from '../../src/validators/package-validator';
 import { ValidationError } from '../../src/types/errors';
 
 describe('Phone Validator Integration', () => {
@@ -25,7 +22,7 @@ describe('Phone Validator Integration', () => {
       '+254112345678', // International 01x
     ];
 
-    validNumbers.forEach(phone => {
+    validNumbers.forEach((phone) => {
       it(`should validate ${phone} as valid`, () => {
         expect(isValidKenyanPhoneNumber(phone)).toBe(true);
         expect(() => validateKenyanPhoneNumber(phone)).not.toThrow();
@@ -51,7 +48,7 @@ describe('Phone Validator Integration', () => {
       '+2551234567', // Wrong country code
     ];
 
-    invalidNumbers.forEach(phone => {
+    invalidNumbers.forEach((phone) => {
       it(`should reject ${phone} as invalid`, () => {
         expect(isValidKenyanPhoneNumber(phone)).toBe(false);
         expect(() => validateKenyanPhoneNumber(phone)).toThrow(ValidationError);
@@ -65,7 +62,7 @@ describe('Package Validator Integration', () => {
     it('should validate typical package values', () => {
       const validValues = [100, 500, 1000, 5000, 50000, 100000, 500000, 1000000];
 
-      validValues.forEach(value => {
+      validValues.forEach((value) => {
         expect(isValidPackageValue(value)).toBe(true);
         expect(() => validatePackageValue(value)).not.toThrow();
       });
@@ -74,7 +71,7 @@ describe('Package Validator Integration', () => {
     it('should reject invalid package values', () => {
       const invalidValues = [-100, -1, 1000001, 2000000, 10000000];
 
-      invalidValues.forEach(value => {
+      invalidValues.forEach((value) => {
         expect(isValidPackageValue(value)).toBe(false);
         expect(() => validatePackageValue(value)).toThrow(ValidationError);
       });

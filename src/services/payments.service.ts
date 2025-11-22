@@ -1,10 +1,6 @@
 import { HttpClient } from '../http/http-client';
 import { BusinessId } from '../types/common';
-import {
-  PaymentSTKRequest,
-  VerifyPaymentRequest,
-  PaymentResponse,
-} from '../types/payments';
+import { PaymentSTKRequest, VerifyPaymentRequest, PaymentResponse } from '../types/payments';
 
 /**
  * Service for managing M-Pesa payments

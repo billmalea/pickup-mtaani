@@ -38,75 +38,95 @@ describeIfApiKey('Agent Packages Integration Tests', () => {
   });
 
   describe('Package Lifecycle', () => {
-    it.skip('should create an agent package', async () => {
-      // Skip: Requires valid agents set up in the account
-      // The API validation may require additional fields not in the docs
-      const zones = await client.locations.getZones();
-      expect(zones.length).toBeGreaterThanOrEqual(1);
+    it.skip(
+      'should create an agent package',
+      async () => {
+        // Skip: Requires valid agents set up in the account
+        // The API validation may require additional fields not in the docs
+        const zones = await client.locations.getZones();
+        expect(zones.length).toBeGreaterThanOrEqual(1);
 
-      const agents = await client.agents.list();
-      expect(agents.length).toBeGreaterThanOrEqual(2);
-      expect(agents[0]).toBeDefined();
-      expect(agents[1]).toBeDefined();
+        const agents = await client.agents.list();
+        expect(agents.length).toBeGreaterThanOrEqual(2);
+        expect(agents[0]).toBeDefined();
+        expect(agents[1]).toBeDefined();
 
-      // Create package
-      const newPackage = await client.agentPackages.create(businessId, {
-        senderAgentId: agents[0]!.id,
-        receiverAgentId: agents[1]!.id,
-        customerName: 'Integration Test Customer',
-        customerPhoneNumber: testConfig.testPhone,
-        packageName: 'Test package for integration tests',
-        packageValue: 1000,
-        paymentOption: 'vendor' as const,
-        on_delivery_balance: 500,
-      });
+        // Create package
+        const newPackage = await client.agentPackages.create(businessId, {
+          senderAgentId: agents[0]!.id,
+          receiverAgentId: agents[1]!.id,
+          customerName: 'Integration Test Customer',
+          customerPhoneNumber: testConfig.testPhone,
+          packageName: 'Test package for integration tests',
+          packageValue: 1000,
+          paymentOption: 'vendor' as const,
+          on_delivery_balance: 500,
+        });
 
-      expect(newPackage).toBeDefined();
-      expect(newPackage).toHaveProperty('id');
-      expect(typeof newPackage.id).toBe('number');
+        expect(newPackage).toBeDefined();
+        expect(newPackage).toHaveProperty('id');
+        expect(typeof newPackage.id).toBe('number');
 
-      // Store for cleanup
-      createdPackageId = newPackage.id;
-    }, testConfig.timeout);
+        // Store for cleanup
+        createdPackageId = newPackage.id;
+      },
+      testConfig.timeout
+    );
 
-    it.skip('should retrieve the created package', async () => {
-      // Skip: Depends on successful package creation
-      expect(createdPackageId).not.toBeNull();
+    it.skip(
+      'should retrieve the created package',
+      async () => {
+        // Skip: Depends on successful package creation
+        expect(createdPackageId).not.toBeNull();
 
-      const package_ = await client.agentPackages.get(createdPackageId!, businessId);
+        const package_ = await client.agentPackages.get(createdPackageId!, businessId);
 
-      expect(package_).toBeDefined();
-      expect(package_.id).toBe(createdPackageId);
-    }, testConfig.timeout);
+        expect(package_).toBeDefined();
+        expect(package_.id).toBe(createdPackageId);
+      },
+      testConfig.timeout
+    );
 
-    it('should list agent packages', async () => {
-      const response = await client.agentPackages.list(businessId);
+    it(
+      'should list agent packages',
+      async () => {
+        const response = await client.agentPackages.list(businessId);
 
-      expect(response).toBeDefined();
-      expect(response.data).toBeDefined();
-      expect(Array.isArray(response.data)).toBe(true);
-    }, testConfig.timeout);
+        expect(response).toBeDefined();
+        expect(response.data).toBeDefined();
+        expect(Array.isArray(response.data)).toBe(true);
+      },
+      testConfig.timeout
+    );
 
-    it.skip('should update package details', async () => {
-      // Skip: Depends on successful package creation
-      expect(createdPackageId).not.toBeNull();
+    it.skip(
+      'should update package details',
+      async () => {
+        // Skip: Depends on successful package creation
+        expect(createdPackageId).not.toBeNull();
 
-      const updated = await client.agentPackages.update(createdPackageId!, {
-        packageName: 'Updated test package description',
-        packageValue: 1500,
-      });
+        const updated = await client.agentPackages.update(createdPackageId!, {
+          packageName: 'Updated test package description',
+          packageValue: 1500,
+        });
 
-      expect(updated).toBeDefined();
-      expect(updated.id).toBe(createdPackageId);
-    }, testConfig.timeout);
+        expect(updated).toBeDefined();
+        expect(updated.id).toBe(createdPackageId);
+      },
+      testConfig.timeout
+    );
   });
 
   describe('GET /packages/agent/unpaid', () => {
-    it('should fetch unpaid packages', async () => {
-      const unpaidPackages = await client.agentPackages.getUnpaid(businessId);
+    it(
+      'should fetch unpaid packages',
+      async () => {
+        const unpaidPackages = await client.agentPackages.getUnpaid(businessId);
 
-      expect(unpaidPackages).toBeDefined();
-      expect(Array.isArray(unpaidPackages)).toBe(true);
-    }, testConfig.timeout);
+        expect(unpaidPackages).toBeDefined();
+        expect(Array.isArray(unpaidPackages)).toBe(true);
+      },
+      testConfig.timeout
+    );
   });
 });

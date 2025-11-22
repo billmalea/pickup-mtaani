@@ -30,7 +30,7 @@ export class DeliveryChargeService {
   async getAgentPackageFee(params: AgentDeliveryChargeParams): Promise<{ price: number }> {
     const response = await this.http.get<DeliveryChargeResponse>(
       '/delivery-charge/agent-package',
-      params
+      params as unknown as Record<string, unknown>
     );
     return response.data;
   }
@@ -51,12 +51,10 @@ export class DeliveryChargeService {
    * console.log(fee.price); // e.g., 200
    * ```
    */
-  async getDoorstepPackageFee(
-    params: DoorstepDeliveryChargeParams
-  ): Promise<{ price: number }> {
+  async getDoorstepPackageFee(params: DoorstepDeliveryChargeParams): Promise<{ price: number }> {
     const response = await this.http.get<DeliveryChargeResponse>(
       '/delivery-charge/doorstep-package',
-      params
+      params as unknown as Record<string, unknown>
     );
     return response.data;
   }
