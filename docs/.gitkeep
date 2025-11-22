@@ -1,0 +1,2 @@
+# This directory will contain generated API documentation
+# Run: npm run docs (or npx typedoc --out docs src/index.ts)

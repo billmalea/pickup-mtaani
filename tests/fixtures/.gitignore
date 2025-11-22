@@ -1,0 +1,9 @@
+# Test fixtures - sample data for testing
+
+# Add .env.local to gitignore
+.env.local
+.env.test
+
+# Keep fixture files
+!*.json
+!*.ts

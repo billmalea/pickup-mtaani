@@ -382,6 +382,54 @@ validatePackageValue(5000); // Valid
 validatePackageValue(2000000); // Throws ValidationError
 ```
 
+## Testing
+
+This SDK includes comprehensive test coverage with both unit and integration tests.
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run only unit tests
+npm run test:unit
+
+# Run only integration tests (requires API credentials)
+npm run test:integration
+
+# Run tests in watch mode
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+```
+
+### Integration Tests Setup
+
+Integration tests require actual API credentials. To run them:
+
+1. Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. Add your credentials to `.env.local`:
+   ```env
+   PICKUP_MTAANI_API_KEY=your_actual_api_key
+   PICKUP_MTAANI_BUSINESS_ID=your_business_id
+   TEST_PHONE=0712345678
+   ```
+
+3. Run integration tests:
+   ```bash
+   npm run test:integration
+   ```
+
+**Note:** `.env.local` is gitignored and will never be committed to version control. Integration tests will automatically skip if credentials are not configured.
+
+For detailed testing documentation, see [TESTING.md](./TESTING.md) and [tests/integration/README.md](./tests/integration/README.md).
+
 ## API Reference
 
 See [API Documentation](https://api.pickupmtaani.com/api/v1/docs/) for complete API reference.
