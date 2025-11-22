@@ -5,7 +5,7 @@
  * Express deliveries use GPS coordinates for pickup and delivery locations.
  */
 
-import { PickupMtaaniClient } from 'pickup-mtaani-sdk';
+import { PickupMtaaniClient } from '../src';
 
 const client = new PickupMtaaniClient({
   apiKey: process.env.PICKUP_MTAANI_API_KEY || 'your_api_key_here',
@@ -23,7 +23,7 @@ async function expressDeliveryExample() {
     console.log('🚚 Fetching delivery modes...');
     const deliveryModes = await client.expressDeliveries.getDeliveryModes();
     console.log('Available delivery modes:');
-    deliveryModes.forEach(mode => {
+    deliveryModes.forEach((mode) => {
       console.log(`- ${mode.name}: ${mode.description}`);
       console.log(`  Base rate: KES ${mode.base_rate}, Per km: KES ${mode.per_km_rate}`);
     });
@@ -140,7 +140,7 @@ async function expressDeliveryExample() {
     });
     console.log(`Total deliveries: ${deliveriesResponse.total}`);
     console.log('Recent deliveries:');
-    deliveriesResponse.data.forEach(delivery => {
+    deliveriesResponse.data.forEach((delivery) => {
       console.log(`- ${delivery.tracking_number}: ${delivery.status} (${delivery.recipient_name})`);
     });
 
@@ -152,12 +152,14 @@ async function expressDeliveryExample() {
   } catch (error) {
     console.error('❌ Error:', error);
     
-    if (error.name === 'ValidationError') {
-      console.error('Validation error:', error.message);
-    } else if (error.name === 'InsufficientBalanceError') {
-      console.error('Insufficient balance for express delivery');
-    } else if (error.name === 'RateLimitError') {
-      console.error('Too many requests. Please wait and try again.');
+    if (error instanceof Error) {
+      if (error.name === 'ValidationError') {
+        console.error('Validation error:', error.message);
+      } else if (error.name === 'InsufficientBalanceError') {
+        console.error('Insufficient balance for express delivery');
+      } else if (error.name === 'RateLimitError') {
+        console.error('Too many requests. Please wait and try again.');
+      }
     }
   }
 }

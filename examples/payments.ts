@@ -5,7 +5,7 @@
  * for paying package delivery charges.
  */
 
-import { PickupMtaaniClient } from 'pickup-mtaani-sdk';
+import { PickupMtaaniClient } from '../src';
 
 const client = new PickupMtaaniClient({
   apiKey: process.env.PICKUP_MTAANI_API_KEY || 'your_api_key_here',
@@ -50,7 +50,7 @@ async function mpesaPaymentExample() {
     }
 
     console.log(`Found ${allUnpaidPackages.length} unpaid package(s)`);
-    console.log('Package IDs:', allUnpaidPackages.map(p => `${p.id} (${p.type})`).join(', '));
+    console.log('Package IDs:', allUnpaidPackages.map((p) => `${p.id} (${p.type})`).join(', '));
 
     // 2. Validate phone number for payment
     console.log('\n📞 Validating M-Pesa phone number...');
@@ -152,18 +152,20 @@ async function mpesaPaymentExample() {
   } catch (error) {
     console.error('\n❌ Error:', error);
     
-    if (error.name === 'ValidationError') {
-      console.error('Validation error:', error.message);
-      console.error('Please check phone number format and package details');
-    } else if (error.name === 'PaymentError') {
-      console.error('Payment error:', error.message);
-      console.error('Common causes:');
-      console.error('- Insufficient M-Pesa balance');
-      console.error('- Wrong PIN entered');
-      console.error('- Transaction cancelled by user');
-      console.error('- M-Pesa service temporarily unavailable');
-    } else if (error.name === 'RateLimitError') {
-      console.error('Too many payment requests. Please wait before retrying.');
+    if (error instanceof Error) {
+      if (error.name === 'ValidationError') {
+        console.error('Validation error:', error.message);
+        console.error('Please check phone number format and package details');
+      } else if (error.name === 'PaymentError') {
+        console.error('Payment error:', error.message);
+        console.error('Common causes:');
+        console.error('- Insufficient M-Pesa balance');
+        console.error('- Wrong PIN entered');
+        console.error('- Transaction cancelled by user');
+        console.error('- M-Pesa service temporarily unavailable');
+      } else if (error.name === 'RateLimitError') {
+        console.error('Too many payment requests. Please wait before retrying.');
+      }
     }
   }
 }

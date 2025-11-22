@@ -265,12 +265,17 @@ client.validators.validatePackageValue(5000, 1000000);
 
 ### "Cannot find module 'pickup-mtaani-sdk'"
 
-The examples import from 'pickup-mtaani-sdk'. If running locally before publishing:
+The examples use relative imports from '../src' for local development:
 
 ```typescript
-// Change imports to use relative path
+// For local development (current setup)
 import { PickupMtaaniClient } from '../src';
+
+// After npm publish
+import { PickupMtaaniClient } from 'pickup-mtaani-sdk';
 ```
+
+**Note**: The examples contain TypeScript errors because they use placeholder API responses that don't match the actual API structure. These examples serve as **conceptual guides** and should be updated with actual API responses once you have access to the real API.
 
 ### "Authentication Error"
 

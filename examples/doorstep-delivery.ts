@@ -5,7 +5,7 @@
  * Doorstep packages are delivered from an agent location to a specific address.
  */
 
-import { PickupMtaaniClient } from 'pickup-mtaani-sdk';
+import { PickupMtaaniClient } from '../src';
 
 const client = new PickupMtaaniClient({
   apiKey: process.env.PICKUP_MTAANI_API_KEY || 'your_api_key_here',
@@ -127,12 +127,14 @@ async function doorstepDeliveryExample() {
   } catch (error) {
     console.error('❌ Error:', error);
     
-    if (error.name === 'ValidationError') {
-      console.error('Validation error:', error.message);
-    } else if (error.name === 'InsufficientBalanceError') {
-      console.error('Please top up your wallet to create more packages');
-    } else if (error.name === 'NotFoundError') {
-      console.error('Resource not found:', error.message);
+    if (error instanceof Error) {
+      if (error.name === 'ValidationError') {
+        console.error('Validation error:', error.message);
+      } else if (error.name === 'InsufficientBalanceError') {
+        console.error('Please top up your wallet to create more packages');
+      } else if (error.name === 'NotFoundError') {
+        console.error('Resource not found:', error.message);
+      }
     }
   }
 }

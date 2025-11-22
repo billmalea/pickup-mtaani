@@ -3,7 +3,10 @@
 Official Node.js/TypeScript SDK for the Pickup Mtaani API - Kenya's leading delivery platform.
 
 [![npm version](https://img.shields.io/npm/v/pickup-mtaani-sdk.svg)](https://www.npmjs.com/package/pickup-mtaani-sdk)
+[![CI](https://github.com/billmalea/pickup-mtaani/actions/workflows/ci.yml/badge.svg)](https://github.com/billmalea/pickup-mtaani/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-16%2B-green.svg)](https://nodejs.org/)
 
 ## Features
 

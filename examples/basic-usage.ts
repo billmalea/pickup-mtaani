@@ -5,7 +5,7 @@
  * and perform basic operations.
  */
 
-import { PickupMtaaniClient } from 'pickup-mtaani-sdk';
+import { PickupMtaaniClient } from '../src';
 
 // Initialize the client
 const client = new PickupMtaaniClient({
@@ -30,28 +30,28 @@ async function basicExample() {
 
     const businessId = business.id;
 
-    // 2. Get available zones
+    // Get available zones
     console.log('\nFetching delivery zones...');
     const zones = await client.locations.getZones();
-    console.log(`Found ${zones.length} zones:`, zones.map(z => z.name));
+    console.log(`Found ${zones.length} zones:`, zones.map((z) => z.name));
 
     // 3. Get areas in a zone
     if (zones.length > 0) {
       console.log('\nFetching areas...');
       const areas = await client.locations.getAreas();
-      console.log(`Found ${areas.length} areas:`, areas.slice(0, 5).map(a => a.name));
+      console.log(`Found ${areas.length} areas:`, areas.slice(0, 5).map((a) => a.name));
     }
 
     // 4. Get business categories
     console.log('\nFetching business categories...');
     const categories = await client.business.getCategories();
-    console.log('Available categories:', categories.map(c => c.name));
+    console.log('Available categories:', categories.map((c) => c.name));
 
     // 5. List agents (with pagination)
     console.log('\nFetching available agents...');
     const agentsResponse = await client.agents.list({ page: 1, perPage: 5 });
     console.log(`Found ${agentsResponse.total} total agents (showing first 5):`);
-    agentsResponse.data.forEach(agent => {
+    agentsResponse.data.forEach((agent) => {
       console.log(`- ${agent.name} at ${agent.location_name} (Available: ${agent.is_available})`);
     });
 
@@ -68,12 +68,14 @@ async function basicExample() {
     console.error('❌ Error:', error);
     
     // Handle specific error types
-    if (error.name === 'AuthenticationError') {
-      console.error('Authentication failed. Please check your API key.');
-    } else if (error.name === 'ValidationError') {
-      console.error('Validation failed:', error.message);
-    } else if (error.name === 'NotFoundError') {
-      console.error('Resource not found:', error.message);
+    if (error instanceof Error) {
+      if (error.name === 'AuthenticationError') {
+        console.error('Authentication failed. Please check your API key.');
+      } else if (error.name === 'ValidationError') {
+        console.error('Validation failed:', error.message);
+      } else if (error.name === 'NotFoundError') {
+        console.error('Resource not found:', error.message);
+      }
     }
   }
 }

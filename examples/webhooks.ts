@@ -5,7 +5,7 @@
  * for real-time notifications about package status changes and payments.
  */
 
-import { PickupMtaaniClient, WebhookEvent } from 'pickup-mtaani-sdk';
+import { PickupMtaaniClient, WebhookEvent } from '../src';
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -46,7 +46,7 @@ async function registerWebhook() {
   } catch (error) {
     console.error('❌ Error registering webhook:', error);
     
-    if (error.name === 'ValidationError') {
+    if (error instanceof Error && error.name === 'ValidationError') {
       console.error('Invalid webhook URL. Must be a valid HTTPS URL.');
     }
   }

@@ -5,7 +5,7 @@
  * Agent packages are delivered between two agent locations.
  */
 
-import { PickupMtaaniClient } from 'pickup-mtaani-sdk';
+import { PickupMtaaniClient } from '../src';
 
 const client = new PickupMtaaniClient({
   apiKey: process.env.PICKUP_MTAANI_API_KEY || 'your_api_key_here',
@@ -116,11 +116,12 @@ async function agentPackageExample() {
   } catch (error) {
     console.error('❌ Error:', error);
     
-    if (error.name === 'ValidationError') {
-      console.error('Validation error:', error.message);
-      console.error('Details:', error.details);
-    } else if (error.name === 'InsufficientBalanceError') {
-      console.error('Insufficient balance to create package');
+    if (error instanceof Error) {
+      if (error.name === 'ValidationError') {
+        console.error('Validation error:', error.message);
+      } else if (error.name === 'InsufficientBalanceError') {
+        console.error('Insufficient balance to create package');
+      }
     }
   }
 }
