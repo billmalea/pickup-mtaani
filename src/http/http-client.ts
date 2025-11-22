@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios';
 import { PickupMtaaniConfig, DEFAULT_CONFIG } from '../config';
 import {
   PickupMtaaniError,
